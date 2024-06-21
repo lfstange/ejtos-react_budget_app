@@ -3,6 +3,7 @@ import React, { createContext, useReducer } from 'react';
 // 5. The reducer - this is used to update the state, based on the action
 export const AppReducer = (state, action) => {
     let budget = 0;
+
     switch (action.type) {
         case 'ADD_EXPENSE':
             let total_budget = 0;
@@ -13,6 +14,7 @@ export const AppReducer = (state, action) => {
             );
             total_budget = total_budget + action.payload.cost;
             action.type = "DONE";
+
             if(total_budget <= state.budget) {
                 total_budget = 0;
                 state.expenses.map((currentExp)=> {
@@ -30,6 +32,7 @@ export const AppReducer = (state, action) => {
                     ...state
                 }
             }
+            
             case 'RED_EXPENSE':
                 const red_expenses = state.expenses.map((currentExp)=> {
                     if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
@@ -43,8 +46,9 @@ export const AppReducer = (state, action) => {
                     ...state,
                     expenses: [...red_expenses],
                 };
+
             case 'DELETE_EXPENSE':
-            action.type = "DONE";
+           
             state.expenses.map((currentExp)=> {
                 if (currentExp.name === action.payload) {
                     budget = state.budget + currentExp.cost
@@ -64,12 +68,28 @@ export const AppReducer = (state, action) => {
             return {
                 ...state,
             };
-        case 'CHG_CURRENCY':
-            action.type = "DONE";
-            state.currency = action.payload;
-            return {
-                ...state
-            }
+
+
+            
+
+
+        case 'CHANGE_CURRENCY':
+          if(action.payload === "USD") {
+            state.currency = "$";
+          }
+          if(action.payload === "POU") {
+            state.currency = "£";
+          }
+          if(action.payload === "EUR") {
+            state.currency = "€";
+          }
+          if(action.payload === "RUP") {
+            state.currency = "₹";
+          }
+          action.type = "DONE";
+          return {
+            ...state,
+          };
 
         default:
             return state;
@@ -83,7 +103,7 @@ const initialState = {
         { id: "Marketing", name: 'Marketing', cost: 50 },
         { id: "Finance", name: 'Finance', cost: 300 },
         { id: "Sales", name: 'Sales', cost: 70 },
-        { id: "Human Resource", name: 'Human Resource', cost: 40 },
+        { id: "HR", name: 'Hr', cost: 40 },
         { id: "IT", name: 'IT', cost: 500 },
     ],
     currency: '£'
@@ -114,6 +134,7 @@ export const AppProvider = (props) => {
                 remaining: remaining,
                 dispatch,
                 currency: state.currency
+
             }}
         >
             {props.children}

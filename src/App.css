@@ -7,6 +7,48 @@
   pointer-events: none;
 }
 
+.currency-select {
+  border: none;
+    width: -webkit-fill-available;
+    background-color: #6bd502;
+    color: white;
+    padding: 0 25px;
+}
+/* select item style */
+.currency-select option {
+  background-color: #6bd502;
+  color: white;
+  padding: 5px;
+}
+.currency-select option:hover,
+.currency-select option:focus {
+  background-color: white;
+  color: black;
+}
+
+
+
+.alert-green {
+  background-color: #6bd502 !important;
+}
+
+.btn-allocation {
+  width: 30px;
+    border-radius: 50%;
+    height: 30px;
+    border: 1px solid #999;
+}
+.btn-add {
+  background-color: #6bd502;
+  color: white;
+ 
+}
+.btn-remove {
+  background-color: #ff0000;
+  color: white;
+ 
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -26,6 +68,14 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.input-budget:focus {
+  border: 1px solid black;
+}
+
+.input-budget:focus {
+  border: 1px solid blue;
 }
 
 @keyframes App-logo-spin {
